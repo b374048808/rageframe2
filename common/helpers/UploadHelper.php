@@ -28,21 +28,21 @@ class UploadHelper
      *
      * @var
      */
-    protected static $fileInfo;
+    public static $fileInfo;
 
     /**
      * 当前文件路径
      *
      * @var
      */
-    protected static $filePath = [];
+    public static $filePath = [];
 
     /**
      * 上传类型
      *
      * @var
      */
-    protected static $type;
+    public static $type;
 
     /**
      * 缓存前缀
@@ -85,6 +85,7 @@ class UploadHelper
             }
         }
 
+        // 切片上传
         if (isset(self::$config['chunks']) && isset(self::$config['guid']))
         {
             self::$action = 'chunks';

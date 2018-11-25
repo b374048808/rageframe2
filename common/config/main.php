@@ -38,9 +38,11 @@ return [
         ],
         /** ------ 队列设置 ------ **/
         'queue' => [
-            'class' => 'yii\queue\redis\Queue',
-            'redis' => 'redis', // 连接组件或它的配置
-            'channel' => 'queue', // Queue channel key
+            'class' => 'yii\queue\file\Queue',
+            'path' => '@runtime/queue',
+            // 'class' => 'yii\queue\redis\Queue',
+            // 'redis' => 'redis', // 连接组件或它的配置
+            // 'channel' => 'queue', // Queue channel key
             'as log' => 'yii\queue\LogBehavior',// 日志
         ],
         /** ------ 全文搜索引擎 ------ **/
@@ -74,8 +76,8 @@ return [
             // ... 您可以在这里配置组件的更多属性
         ],
         /** ------ 服务 ------ **/
-        'servers' => [
-            'class' => 'common\servers\Application',
+        'services' => [
+            'class' => 'common\services\Application',
         ]
     ],
 ];

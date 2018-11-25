@@ -1,10 +1,12 @@
 <?php
 return [
-    // 是否开启api log 日志记录
+    /** ------ 日志记录 ------ **/
     'user.log' => true,
-    'user.log.noPostData' => [ // 安全考虑，不接收Post存储到日志的路由
+    'user.log.level' => ['warning', 'error'], // 级别 ['info', 'warning', 'error']
+    'user.log.noPostData' => [ // 安全考虑,不接收Post存储到日志的路由
         'v1/site/login',
     ],
+
     // token有效期是否验证 默认不验证
     'user.accessTokenValidity' => false,
     // api接口token有效期 默认 2 小时

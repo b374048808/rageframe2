@@ -62,15 +62,15 @@ class ArrayHelper extends BaseArrayHelper
      * @param int $pid
      * @return array
      */
-    public static function getChildsId($cate, $pid)
+    public static function getChildsId($cate, $pid, $id = "id", $pidName = 'pid')
     {
         $arr = [];
         foreach ($cate as $v)
         {
-            if ($v['pid'] == $pid)
+            if ($v[$pidName] == $pid)
             {
-                $arr[] = $v['id'];
-                $arr = array_merge($arr, self::getChildsId($cate, $v['id']));
+                $arr[] = $v[$id];
+                $arr = array_merge($arr, self::getChildsId($cate, $v[$id], $id, $pidName));
             }
         }
 
@@ -110,30 +110,28 @@ class ArrayHelper extends BaseArrayHelper
     public static function arraySort($arr, $keys, $type = 'asc')
     {
         $count = count($arr);
-        if($count <= 1)
+        if ($count <= 1)
         {
             return $arr;
         }
-        else
+
+        $keysvalue = [];
+        $new_array = [];
+
+        foreach ($arr as $k => $v)
         {
-            $keysvalue = [];
-            $new_array = [];
-
-            foreach ($arr as $k => $v)
-            {
-                $keysvalue[$k] = $v[$keys];
-            }
-
-            $type == 'asc' ? asort($keysvalue) : arsort($keysvalue);
-            reset($keysvalue);
-
-            foreach ($keysvalue as $k => $v)
-            {
-                $new_array[$k] = $arr[$k];
-            }
-
-            return $new_array;
+            $keysvalue[$k] = $v[$keys];
         }
+
+        $type == 'asc' ? asort($keysvalue) : arsort($keysvalue);
+        reset($keysvalue);
+
+        foreach ($keysvalue as $k => $v)
+        {
+            $new_array[$k] = $arr[$k];
+        }
+
+        return $new_array;
     }
 
     /**
